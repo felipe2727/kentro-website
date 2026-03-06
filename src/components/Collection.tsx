@@ -36,7 +36,7 @@ const stories: StoryBlock[] = [
     tier: "Core — Ground Zero",
     narrative:
       "From the waist down, geometry. The Slab — wide-leg cargos with magnetic-snap squared pockets and quilted knee panels. The Terraform — super-wide raw selvedge in 15oz Japanese denim, rigid and unforgiving, built to break in over years. Above, the Plinth knit in merino-cashmere with an asymmetric snap placket. And at the hip, a brushed steel keychain engraved with a single dot. The center point.",
-    objectPosition: "30% center",
+    objectPosition: "42% center",
   },
 ];
 
