@@ -9,6 +9,7 @@ interface StoryBlock {
   names: string;
   tier: string;
   narrative: string;
+  objectPosition?: string;
 }
 
 const stories: StoryBlock[] = [
@@ -35,6 +36,7 @@ const stories: StoryBlock[] = [
     tier: "Core — Ground Zero",
     narrative:
       "From the waist down, geometry. The Slab — wide-leg cargos with magnetic-snap squared pockets and quilted knee panels. The Terraform — super-wide raw selvedge in 15oz Japanese denim, rigid and unforgiving, built to break in over years. Above, the Plinth knit in merino-cashmere with an asymmetric snap placket. And at the hip, a brushed steel keychain engraved with a single dot. The center point.",
+    objectPosition: "80% center",
   },
 ];
 
@@ -50,8 +52,8 @@ export default function Collection() {
         className="max-w-[1200px] mx-auto mb-20 md:mb-32"
       >
         <h2
-          className="font-[family-name:var(--font-syne)] font-extrabold uppercase text-ink tracking-tight"
-          style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
+          className="font-[family-name:var(--font-syne)] font-extrabold uppercase text-ink tracking-tight break-words"
+          style={{ fontSize: "clamp(2rem, 8vw, 5rem)", letterSpacing: "-0.02em" }}
         >
           The Collection
         </h2>
@@ -62,58 +64,69 @@ export default function Collection() {
 
       {/* Story Blocks */}
       <div className="max-w-[1200px] mx-auto flex flex-col gap-[120px] md:gap-[160px]">
-        {stories.map((story, i) => (
-          <div key={i}>
-            {/* Large editorial image */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8 }}
-              className="relative w-full aspect-[16/9] md:aspect-[2.2/1] overflow-hidden"
+        {stories.map((story, i) => {
+          const isImageLeft = i % 2 === 0;
+          return (
+            <div
+              key={i}
+              className={`flex flex-col ${isImageLeft ? "md:flex-row" : "md:flex-row-reverse"
+                } gap-10 md:gap-16 items-center`}
             >
-              <Image
-                src={story.image}
-                alt={story.imageAlt}
-                fill
-                className="object-cover editorial-img"
-                sizes="100vw"
-              />
-            </motion.div>
+              {/* Image Side */}
+              <motion.div
+                initial={{ opacity: 0, x: isImageLeft ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="w-full md:w-1/2 relative aspect-[4/5] overflow-hidden"
+              >
+                <Image
+                  src={story.image}
+                  alt={story.imageAlt}
+                  fill
+                  className="object-cover editorial-img"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={100}
+                  style={story.objectPosition ? { objectPosition: story.objectPosition } : undefined}
+                />
+              </motion.div>
 
-            {/* Text block below image */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="mt-8 md:mt-12 flex flex-col md:flex-row gap-6 md:gap-16"
-            >
-              {/* Left - names */}
-              <div className="md:w-[35%]">
-                <h3
-                  className="font-[family-name:var(--font-syne)] font-bold uppercase tracking-[0.08em] text-ink whitespace-pre-line"
-                  style={{ fontSize: "clamp(1.2rem, 2vw, 1.6rem)" }}
-                >
-                  {story.names}
-                </h3>
-                <p className="font-[family-name:var(--font-syne)] font-bold text-[0.55rem] tracking-[0.2em] uppercase text-stone mt-3">
-                  {story.tier}
-                </p>
-              </div>
+              {/* Text Side */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.2,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+                className="w-full md:w-1/2 flex flex-col gap-6 md:gap-8 md:px-8"
+              >
+                <div>
+                  <h3
+                    className="font-[family-name:var(--font-syne)] font-bold uppercase tracking-[0.08em] text-ink whitespace-pre-line"
+                    style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}
+                  >
+                    {story.names}
+                  </h3>
+                  <p className="font-[family-name:var(--font-syne)] font-bold text-[0.6rem] tracking-[0.2em] uppercase text-stone mt-3">
+                    {story.tier}
+                  </p>
+                </div>
 
-              {/* Right - narrative */}
-              <div className="md:w-[55%]">
-                <p
-                  className="font-[family-name:var(--font-instrument)] italic text-stone leading-[1.8] max-w-[480px]"
-                  style={{ fontSize: "clamp(1rem, 2.5vw, 1.15rem)" }}
-                >
-                  {story.narrative}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        ))}
+                <div>
+                  <p
+                    className="font-[family-name:var(--font-instrument)] italic text-stone leading-[1.8] max-w-[480px]"
+                    style={{ fontSize: "clamp(1rem, 2.5vw, 1.15rem)" }}
+                  >
+                    {story.narrative}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

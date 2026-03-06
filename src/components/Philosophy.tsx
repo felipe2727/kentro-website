@@ -23,6 +23,7 @@ export default function Philosophy() {
                 fill
                 className="object-cover editorial-img"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                quality={100}
               />
             </div>
           </motion.div>
@@ -36,8 +37,8 @@ export default function Philosophy() {
             className="w-full md:w-[40%] md:pt-20"
           >
             <h2
-              className="font-[family-name:var(--font-syne)] font-extrabold uppercase text-ink tracking-tight"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
+              className="font-[family-name:var(--font-syne)] font-extrabold uppercase text-ink tracking-tight break-words"
+              style={{ fontSize: "clamp(1.6rem, 8vw, 3rem)", letterSpacing: "-0.02em" }}
             >
               Architectural
               <br />

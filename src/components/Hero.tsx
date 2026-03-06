@@ -18,7 +18,7 @@ export default function Hero() {
           <span
             className="font-[family-name:var(--font-syne)] font-extrabold uppercase text-ink block"
             style={{
-              fontSize: "clamp(5rem, 15vw, 14rem)",
+              fontSize: "clamp(3.5rem, 15vw, 14rem)",
               letterSpacing: "-0.03em",
               lineHeight: 0.85,
             }}
@@ -42,6 +42,7 @@ export default function Hero() {
               className="object-cover editorial-img"
               priority
               sizes="(max-width: 768px) 55vw, 28vw"
+              quality={100}
             />
           </div>
         </motion.div>
@@ -60,7 +61,7 @@ export default function Hero() {
           <span
             className="font-[family-name:var(--font-syne)] font-extrabold uppercase block"
             style={{
-              fontSize: "clamp(5rem, 15vw, 14rem)",
+              fontSize: "clamp(3.5rem, 15vw, 14rem)",
               letterSpacing: "-0.03em",
               lineHeight: 0.85,
             }}
