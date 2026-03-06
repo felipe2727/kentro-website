@@ -23,7 +23,6 @@ export default function Philosophy() {
                 fill
                 className="object-cover editorial-img"
                 sizes="(max-width: 768px) 100vw, 50vw"
-                quality={100}
               />
             </div>
           </motion.div>

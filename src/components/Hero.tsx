@@ -42,7 +42,6 @@ export default function Hero() {
               className="object-cover editorial-img"
               priority
               sizes="(max-width: 768px) 55vw, 28vw"
-              quality={100}
             />
           </div>
         </motion.div>
